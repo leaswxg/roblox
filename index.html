@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leaswxg // SOCIALS</title>
+    <style>
+        /* =========================================================================
+         * 1. CORE STYLE SYSTEM CONFIGURATION & ROOT DESIGN VARIABLES
+         * ========================================================================= */
+        :root {
+            --pink-primary: #ff2a85;
+            --pink-glow: #ff71b2;
+            --pink-dark: #4c0022;
+            --pink-ultra-dark: #110007;
+            --pink-toxic: #ff0055;
+            --pink-muted: #a32258;
+            --cyber-white: #fff0f5;
+            --cyber-black: #050002;
+            --cyber-green: #39ff14;
+            --cyber-green-glow: rgba(57, 255, 20, 0.8);
+            --neon-shadow: 0 0 5px var(--pink-primary), 0 0 15px var(--pink-primary);
+            --box-glow: inset 0 0 20px rgba(255, 42, 133, 0.25), 0 0 20px rgba(255, 42, 133, 0.2);
+            --font-display: 'Courier New', Courier, monospace;
+        }
+
+        /* =========================================================================
+         * 2. STRUCTURE BASE RESET RULES
+         * ========================================================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--cyber-black);
+            font-family: var(--font-display);
+            color: var(--cyber-white);
+            cursor: none; 
+        }
+
+        /* =========================================================================
+         * 3. FULLSCREEN INTRO ENGINE CONFIG (lea.gif + Text Overlaid Simultaneously)
+         * ========================================================================= */
+        #intro-master-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .intro-gif-stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .intro-gif-stage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+
+        .intro-text-stage {
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3); 
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        .intro-title-text {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            text-transform: lowercase;
+            color: #fff;
+            text-shadow: 0 0 25px var(--pink-primary), 0 0 50px var(--pink-toxic);
+            animation: structuralGlitchLoop 2s infinite linear;
+        }
+
+        .intro-subtitle-text {
+            font-size: 12px;
+            letter-spacing: 5px;
+            color: var(--pink-glow);
+            text-transform: uppercase;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--pink-primary);
+        }
+
+        /* =========================================================================
+         * 4. SCOPE HITMARKER INTERFACE POINTER
+         * ========================================================================= */
+        #custom-scope-cursor {
+            position: fixed;
+            width: 44px;
+            height: 44px;
+            pointer-events: none;
+            z-index: 100000;
+            transform: translate(-50%, -50%);
+            display: block;
+        }
+
+        @media (pointer: coarse) {
+            #custom-scope-cursor { display: none !important; }
+            body, html { cursor: auto !important; }
+        }
+
+        .scope-crosshair-element {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            animation: scopeRotateLoop 5s linear infinite, scopePulseSlow 2.5s ease-in-out infinite;
+        }
+
+        .scope-crosshair-element::before,
+        .scope-crosshair-element::after {
+            content: '';
+            position: absolute;
+            background: var(--pink-primary);
+            box-shadow: 0 0 8px var(--pink-primary);
+        }
+
+        .scope-crosshair-element::before {
+            top: 50%;
+            left: -6px;
+            width: 56px;
+            height: 2px;
+            margin-top: -1px;
+        }
+
+        .scope-crosshair-element::after {
+            left: 50%;
+            top: -6px;
+            height: 56px;
+            width: 2px;
+            margin-left: -1px;
+        }
+
+        .scope-center-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            box-shadow: 0 0 8px #fff, 0 0 15px var(--pink-primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* =========================================================================
+         * 5. ENHANCED MATRIX VISUAL ENVIRONMENT MODULES
+         * ========================================================================= */
+        .pink-vignette-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            box-shadow: inset 0 0 130px rgba(0,0,0,0.95), inset 0 0 70px rgba(255, 42, 133, 0.4);
+            pointer-events: none;
+            z-index: 9990;
+        }
+
+        .cyber-grid-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 42, 133, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 42, 133, 0.05) 1px, transparent 1px);
+            background-size: 45px 45px;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .crt-scanline-matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(255, 42, 133, 0.06) 50%, rgba(0, 0, 0, 0.28) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9995;
+        }
+
+        .scrolling-glitch-bar {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 113, 178, 0.45);
+            box-shadow: 0 0 15px var(--pink-glow);
+            opacity: 0.65;
+            z-index: 9992;
+            pointer-events: none;
+            top: -10px;
+            animation: glitchLineTrack 14s linear infinite;
+        }
+
+        #pink-snow-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .click-pulse-wave {
+            position: fixed;
+            border: 2px solid var(--pink-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999999;
+            transform: translate(-50%, -50%);
+            animation: runShockwave 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        /* =========================================================================
+         * 6. CENTRAL GRAPHIC USER INTERFACE HUB
+         * ========================================================================= */
+        .main-viewport-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-viewport-wrapper.visible {
+            opacity: 1;
+        }
+
+        .interface-card {
+            width: 100%;
+            max-width: 530px;
+            background: rgba(8, 0, 4, 0.9);
+            border: 1px solid var(--pink-primary);
+            box-shadow: var(--box-glow);
+            border-radius: 2px;
+            position: relative;
+            padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .hw-node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 1px solid var(--pink-glow);
+            pointer-events: none;
+        }
+        .node-tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .node-tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+        .node-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+        .node-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        /* =========================================================================
+         * 7. CENTER ALIGNED LOGO HEADER ELEMENTS
+         * ========================================================================= */
+        .system-identity-block {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .system-sub-meta {
+            font-size: 11px;
+            color: var(--pink-glow);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            font-weight: bold;
+            opacity: 0.85;
+        }
+
+        .centered-title-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .identity-core-header {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            text-transform: lowercase;
+            color: #fff;
+            text-shadow: 0 0 10px var(--pink-primary);
+            position: relative;
+            animation: structuralGlitchLoop 4.5s infinite linear alternate-reverse;
+            text-align: center;
+        }
+
+        .identity-core-header::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            text-shadow: 2px 0 var(--pink-toxic);
+            top: 0;
+            color: #fff;
+            background: transparent;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0); 
+            animation: structuralGlitchSliceOne 3s infinite linear alternate-reverse;
+            text-align: center;
+            width: 100%;
+        }
+
+        .identity-core-header::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 #ff00aa;
+            top: 0;
+            color: #fff;
+            background: transparent;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0); 
+            animation: structuralGlitchSliceTwo 2.5s infinite linear alternate-reverse;
+            text-align: center;
+            width: 100%;
+        }
+
+        .system-hr-divider {
+            width: 75px;
+            height: 2px;
+            background: var(--pink-primary);
+            margin: 18px auto 0 auto;
+            position: relative;
+            box-shadow: 0 0 8px var(--pink-primary);
+            border: none;
+        }
+
+        /* =========================================================================
+         * 8. NAVIGATION BUTTONS LAYER WITH GLASS CALLOUT RECTANGLES
+         * ========================================================================= */
+        .interactive-button-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 34px; 
+            position: relative;
+        }
+
+        .button-wrapper-block {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Transparent Glass Pinkish Rectangle Base Config */
+        .glass-badge {
+            position: absolute;
+            background: rgba(255, 42, 133, 0.12);
+            border: 1px solid rgba(255, 42, 133, 0.4);
+            padding: 5px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 2px;
+            white-space: nowrap;
+            z-index: 50;
+        }
+
+        /* Top-Right Green Rectangle over Roblox Button */
+        .badge-roblox-status {
+            top: -20px;
+            right: 4px;
+            color: var(--cyber-green);
+            box-shadow: inset 0 0 6px rgba(57, 255, 20, 0.15);
+            text-shadow: 0 0 6px var(--cyber-green-glow);
+        }
+
+        /* Right-Side Pinkish Rectangle next to Instagram Button */
+        .badge-instagram-status {
+            left: calc(100% + 15px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink-glow);
+            box-shadow: inset 0 0 6px rgba(255, 42, 133, 0.2);
+            text-shadow: 0 0 6px var(--pink-primary);
+        }
+
+        /* Responsive adaptation: Positions badges gracefully on mobile windows */
+        @media (max-width: 768px) {
+            .badge-instagram-status {
+                position: absolute;
+                left: 4px;
+                top: calc(100% + 8px);
+                transform: none;
+            }
+            .interactive-button-grid {
+                gap: 42px;
+            }
+        }
+
+        .cyberpunk-nav-action {
+            width: 100%;
+            background: rgba(12, 0, 6, 0.75);
+            border: 1px solid var(--pink-primary);
+            padding: 18px 22px;
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--cyber-white);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            border-radius: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cyberpunk-nav-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 113, 178, 0.25), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .cyberpunk-nav-action:hover {
+            background: rgba(255, 42, 133, 0.15);
+            border-color: var(--pink-glow);
+            box-shadow: 0 0 25px rgba(255, 42, 133, 0.65), inset 0 0 12px rgba(255, 42, 133, 0.3);
+            text-shadow: 0 0 8px #fff;
+            transform: translateY(-2px);
+        }
+
+        .cyberpunk-nav-action:hover::before {
+            left: 100%;
+        }
+
+        .cyberpunk-nav-action:active {
+            transform: translateY(1px);
+            box-shadow: 0 0 12px rgba(255, 42, 133, 0.4);
+        }
+
+        .action-sub-tag {
+            position: absolute;
+            right: 18px;
+            font-size: 10px;
+            color: var(--pink-glow);
+            opacity: 0.65;
+        }
+
+        /* =========================================================================
+         * 9. TRADING MANIFEST TRIGGER SYSTEM (Repositioned Yellow Layout Fix)
+         * ========================================================================= */
+        .policy-trigger-zone {
+            margin-top: 45px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .policy-manifest-trigger {
+            width: 46px;
+            height: 46px;
+            background: rgba(25, 0, 12, 0.9);
+            border: 1px solid var(--pink-primary);
+            color: var(--pink-primary);
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 900;
+            cursor: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            box-shadow: 0 0 10px rgba(255, 42, 133, 0.15);
+            border-radius: 1px;
+            z-index: 50;
+        }
+
+        .policy-manifest-trigger:hover {
+            background: var(--pink-primary);
+            color: var(--cyber-black);
+            box-shadow: 0 0 20px var(--pink-primary);
+            transform: scale(1.05);
+        }
+
+        /* FULLY FIXED ARROW LOGIC FIELD (Stays visible across desktop & mobile screens) */
+        .attention-arrow-indicator {
+            position: absolute;
+            left: calc(50% + 35px); 
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffe600;
+            font-size: 13px;
+            font-weight: bold;
+            pointer-events: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px #ffe600, 0 0 15px rgba(255, 230, 0, 0.5);
+            animation: horizontalPulseArrow 1.2s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* Mobile specific layout tweaks to make sure it scales beautifully */
+        @media (max-width: 480px) {
+            .attention-arrow-indicator {
+                left: calc(50% + 30px);
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+        }
+
+        /* =========================================================================
+         * 10. SYSTEM POLICY DIALOG CARD WITH FLOATING LOOPS
+         * ========================================================================= */
+        .modal-portal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(4, 0, 2, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 50000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-portal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .policy-manifest-card {
+            width: 100%;
+            max-width: 500px;
+            background: var(--pink-ultra-dark);
+            border: 1px solid var(--pink-primary);
+            box-shadow: 0 0 50px rgba(255, 42, 133, 0.45);
+            position: relative;
+            padding: 35px 30px;
+            transform: scale(0.9) translateY(30px);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: structuralFloatLoop 5s ease-in-out infinite;
+        }
+
+        .modal-portal-overlay.active .policy-manifest-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .manifest-dismiss-box {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            width: 42px;
+            height: 42px;
+            background: var(--pink-primary);
+            border: 1px solid var(--pink-primary);
+            color: var(--cyber-black);
+            font-weight: 900;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all 0.2s ease;
+        }
+
+        .manifest-dismiss-box:hover {
+            background: var(--cyber-black);
+            color: var(--pink-glow);
+            border-color: var(--pink-glow);
+        }
+
+        .manifest-header-layout {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .manifest-alert-triangle {
+            color: var(--pink-glow);
+            font-size: 22px;
+            animation: structuralGlitchLoop 2s infinite linear alternate-reverse;
+        }
+
+        .manifest-headline-text {
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .manifest-hr-break {
+            border: none;
+            border-top: 1px dashed var(--pink-primary);
+            margin-bottom: 22px;
+            opacity: 0.6;
+        }
+
+        .manifest-notice-banner {
+            background: rgba(255, 42, 133, 0.14);
+            border-left: 3px solid var(--pink-primary);
+            padding: 14px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--pink-glow);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .manifest-scrolling-content {
+            font-size: 13px;
+            line-height: 1.65;
+            color: rgba(255, 240, 245, 0.88);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .manifest-scrolling-content p strong {
+            color: #fff;
+            text-shadow: 0 0 8px var(--pink-primary);
+            font-weight: bold;
+        }
+
+        /* =========================================================================
+         * 11. ROUTING LINK OVERLAY INTERCEPTOR (Loading.gif Component)
+         * ========================================================================= */
+        .redirection-engine-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--cyber-black);
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .redirection-engine-curtain.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .loading-asset-hull {
+            width: 280px;
+            height: 280px;
+            border: 1px solid rgba(255, 42, 133, 0.35);
+            padding: 10px;
+            position: relative;
+            background: rgba(10, 0, 5, 0.6);
+        }
+
+        .loading-asset-hull img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .engine-telemetry-text {
+            margin-top: 25px;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--pink-primary);
+            text-transform: uppercase;
+            font-weight: bold;
+            animation: structuralGlitchLoop 1.5s infinite alternate;
+        }
+
+        /* =========================================================================
+         * 12. GRAPHICS TIMELINE MATRICES (Keyframe Loop Pools)
+         * ========================================================================= */
+        @keyframes scopeRotateLoop {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes scopePulseSlow {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 15px rgba(255, 42, 133, 0.35); }
+        }
+
+        @keyframes structuralFloatLoop {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes horizontalPulseArrow {
+            0%, 100% { transform: translate(0, -50%); opacity: 0.7; }
+            50% { transform: translate(6px, -50%); opacity: 1; text-shadow: 0 0 12px #ffe600; }
+        }
+
+        @keyframes glitchLineTrack {
+            0% { top: -20px; }
+            100% { top: calc(100vh + 20px); }
+        }
+
+        @keyframes runShockwave {
+            0% { width: 0px; height: 0px; opacity: 1; }
+            100% { width: 150px; height: 150px; opacity: 0; border-width: 1px; }
+        }
+
+        @keyframes structuralGlitchLoop {
+            0% { text-shadow: 1px 1px 0 var(--pink-toxic), -1px -1px 0 #00ffff; }
+            20% { text-shadow: -1px 2px 0 var(--pink-toxic), 2px -1px 0 #00ffff; }
+            40% { text-shadow: 1px -1px 0 var(--pink-toxic), -2px 1px 0 #00ffff; }
+            60% { text-shadow: -2px -1px 0 var(--pink-toxic), 1px 2px 0 #00ffff; }
+            80% { text-shadow: 2px 1px 0 var(--pink-toxic), -1px -2px 0 #00ffff; }
+            100% { text-shadow: -1px 1px 0 var(--pink-toxic), 2px 2px 0 #00ffff; }
+        }
+
+        @keyframes structuralGlitchSliceOne {
+            0% { clip: rect(25px, 9999px, 50px, 0); }
+            50% { clip: rect(80px, 9999px, 5px, 0); }
+            100% { clip: rect(40px, 9999px, 85px, 0); }
+        }
+
+        @keyframes structuralGlitchSliceTwo {
+            0% { clip: rect(60px, 9999px, 15px, 0); }
+            50% { clip: rect(10px, 9999px, 95px, 0); }
+            100% { clip: rect(75px, 9999px, 30px, 0); }
+        }
+
+        /* =========================================================================
+         * 13. STYLES RESPONSIVE OVERRIDE PARAMETERS
+         * ========================================================================= */
+        @media (max-width: 768px) {
+            .interface-card { padding: 40px 20px; }
+            .identity-core-header { font-size: 30px; }
+            .intro-title-text { font-size: 3rem; letter-spacing: 6px; }
+            .policy-manifest-card { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pink-vignette-system"></div>
+    <div class="crt-scanline-matrix"></div>
+    <div class="cyber-grid-mesh"></div>
+    <div class="scrolling-glitch-bar"></div>
+    
+    <canvas id="pink-snow-canvas"></canvas>
+
+    <div id="custom-scope-cursor">
+        <div class="scope-crosshair-element"></div>
+        <div class="scope-center-dot"></div>
+    </div>
+
+    <div id="intro-master-container">
+        <div class="intro-gif-stage" id="intro-gif-stage">
+            <img src="lea.gif" alt="System Framework Graphics Overlay Thread">
+        </div>
+        <div class="intro-text-stage" id="intro-text-stage">
+            <div class="intro-title-text">leaswxg</div>
+            <div class="intro-subtitle-text">follow my instagram!</div>
+        </div>
+    </div>
+
+    <main class="main-viewport-wrapper" id="mainSceneWrapper">
+        <section class="interface-card">
+            <div class="hw-node node-tl"></div>
+            <div class="hw-node node-tr"></div>
+            <div class="hw-node node-bl"></div>
+            <div class="hw-node node-br"></div>
+
+            <header class="system-identity-block">
+                <span class="system-sub-meta">LEA // GIVEAWAYZ</span>
+                <div class="centered-title-container">
+                    <h1 class="identity-core-header" data-text="leaswxg">leaswxg</h1>
+                </div>
+                <hr class="system-hr-divider">
+            </header>
+
+            <nav class="interactive-button-grid">
+                <div class="button-wrapper-block">
+                    <span class="glass-badge badge-roblox-status">joins on for everyone</span>
+                    <button class="cyberpunk-nav-action" data-target-url="https://roblox.com.ml/users/249876114393/profile">
+                        my roblox
+                        <span class="action-sub-tag">// 01</span>
+                    </button>
+                </div>
+
+                <div class="button-wrapper-block">
+                    <span class="glass-badge badge-instagram-status">DM me for help</span>
+                    <button class="cyberpunk-nav-action" data-target-url="https://www.instagram.com/leaswxg">
+                        instagram
+                        <span class="action-sub-tag">// 02</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="policy-trigger-zone">
+                <button class="policy-manifest-trigger" id="openManifestPortalBtn" aria-label="Query Security Manifest Matrix">!</button>
+                <div class="attention-arrow-indicator" id="attentionArrow">
+                    ◄── <span>read me</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="redirection-engine-curtain" id="redirectionCurtain">
+        <div class="loading-asset-hull">
+            <div class="hw-node node-tl"></div>
+            <div class="hw-node node-tr"></div>
+            <div class="hw-node node-bl"></div>
+            <div class="hw-node node-br"></div>
+            <img src="Loading.gif" alt="Link Destination Latency Processing Asset Frame">
+        </div>
+        <div class="engine-telemetry-text">loading...</div>
+    </div>
+
+    <div class="modal-portal-overlay" id="manifestPortalOverlay">
+        <article class="policy-manifest-card">
+            <button class="manifest-dismiss-box" id="closeManifestPortalBtn" aria-label="Kill Dialogue System Event Process">[X]</button>
+            
+            <div class="manifest-header-layout">
+                <span class="manifest-alert-triangle">▲</span>
+                <h2 class="manifest-headline-text">LEASWXG // ALTS POLICY</h2>
+            </div>
+            
+            <hr class="manifest-hr-break">
+            
+            <div class="manifest-notice-banner">
+                No Trading with Alt Accounts!
+            </div>
+            
+            <div class="manifest-scrolling-content">
+                <p>listen up before you join! <strong>I do not trade alt accounts. Period.</strong></p>
+                <p>My weapons are rare and worth a lot! Some people try to trick me by switching to a secret backup account to trade twice. To keep things fair, I only trade with main accounts.</p>
+                <p>It is snake behavior, it is shady, and it completely wastes my time. If you want to configure a trade with me, you will use your main profile. No alt account swapping, no exceptions.</p>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Core DOM Pointer Matrix Hooks Mapping
+            const introMasterContainer = document.getElementById('intro-master-container');
+            const mainSceneWrapper = document.getElementById('mainSceneWrapper');
+            const scopeCursorElement = document.getElementById('custom-scope-cursor');
+            const redirectionCurtain = document.getElementById('redirectionCurtain');
+            const manifestPortalOverlay = document.getElementById('manifestPortalOverlay');
+            
+            const openManifestPortalBtn = document.getElementById('openManifestPortalBtn');
+            const closeManifestPortalBtn = document.getElementById('closeManifestPortalBtn');
+            const navigationGridActions = document.querySelectorAll('.cyberpunk-nav-action');
+            const attentionArrow = document.getElementById('attentionArrow');
+
+            // Sequential Lifecycle Timing Constraints
+            const FULLSCREEN_INTRO_TIMEOUT_MS = 3000; 
+            const REDIRECT_LATENCY_TIME_MS = 2800;     
+
+            /**
+             * Handles Orchestration Steps for Initial Simultaneous Intro Sequence Fade Out Loop
+             */
+            function coordinateSystemIntroTimeline() {
+                setTimeout(() => {
+                    introMasterContainer.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        introMasterContainer.style.display = 'none';
+                        mainSceneWrapper.classList.add('visible');
+                    }, 1000); 
+
+                }, FULLSCREEN_INTRO_TIMEOUT_MS);
+            }
+
+            // Start Runtime Intro Chain
+            coordinateSystemIntroTimeline();
+
+            // Custom Gun Scope Cursor tracking management loop
+            window.addEventListener('mousemove', (mouseMoveEvent) => {
+                const calculatedXCoordinate = mouseMoveEvent.clientX;
+                const calculatedYCoordinate = mouseMoveEvent.clientY;
+                
+                scopeCursorElement.style.left = `${calculatedXCoordinate}px`;
+                scopeCursorElement.style.top = `${calculatedYCoordinate}px`;
+            });
+
+            // Shockwave Pulse Append Setup Matrix Link Hooks
+            window.addEventListener('click', (pointerClickEvent) => {
+                appendClickRippleShockwave(pointerClickEvent.clientX, pointerClickEvent.clientY);
+            });
+
+            function appendClickRippleShockwave(xViewportLocation, yViewportLocation) {
+                const operationalRippleElement = document.createElement('div');
+                operationalRippleElement.className = 'click-pulse-wave';
+                operationalRippleElement.style.left = `${xViewportLocation}px`;
+                operationalRippleElement.style.top = `${yViewportLocation}px`;
+                
+                document.body.appendChild(operationalRippleElement);
+                
+                setTimeout(() => {
+                    operationalRippleElement.remove();
+                }, 500);
+            }
+
+            // Redirection Intercept Management Modules Configuration
+            function executeSecureLinkRouting(destinationRedirectLinkUrl) {
+                if (!destinationRedirectLinkUrl) return;
+                
+                redirectionCurtain.classList.add('active');
+                
+                setTimeout(() => {
+                    window.location.href = destinationRedirectLinkUrl;
+                }, REDIRECT_LATENCY_TIME_MS);
+            }
+
+            navigationGridActions.forEach(actionAnchorItem => {
+                actionAnchorItem.addEventListener('click', (navigationEventObject) => {
+                    navigationEventObject.preventDefault();
+                    const targetLinkAddress = actionAnchorItem.getAttribute('data-target-url');
+                    executeSecureLinkRouting(targetLinkAddress);
+                });
+            });
+
+            // Policy Portal Overlay Dialogue Controllers Module
+            function deployPolicyPortalModal() {
+                manifestPortalOverlay.classList.add('active');
+                if (attentionArrow) {
+                    attentionArrow.style.display = 'none'; 
+                }
+            }
+
+            function clearPolicyPortalModal() {
+                manifestPortalOverlay.classList.remove('active');
+            }
+
+            openManifestPortalBtn.addEventListener('click', deployPolicyPortalModal);
+            closeManifestPortalBtn.addEventListener('click', clearPolicyPortalModal);
+
+            manifestPortalOverlay.addEventListener('click', (overlayBackdropClickContext) => {
+                if (overlayBackdropClickContext.target === manifestPortalOverlay) {
+                    clearPolicyPortalModal();
+                }
+            });
+
+            document.addEventListener('keydown', (keyboardInputEvent) => {
+                if (keyboardInputEvent.key === 'Escape' && manifestPortalOverlay.classList.contains('active')) {
+                    clearPolicyPortalModal();
+                }
+            });
+
+            // =========================================================================
+            // PINK ATMOSPHERE BACKGROUND PARTICLES CORE SIMULATION ENGINE
+            // =========================================================================
+            const systemAtmosphereCanvas = document.getElementById('pink-snow-canvas');
+            const coreCanvasRenderingContext2D = systemAtmosphereCanvas.getContext('2d');
+
+            let appViewWidthBoundary = window.innerWidth;
+            let appViewHeightBoundary = window.innerHeight;
+            
+            systemAtmosphereCanvas.width = appViewWidthBoundary;
+            systemAtmosphereCanvas.height = appViewHeightBoundary;
+
+            window.addEventListener('resize', () => {
+                appViewWidthBoundary = window.innerWidth;
+                appViewHeightBoundary = window.innerHeight;
+                systemAtmosphereCanvas.width = appViewWidthBoundary;
+                systemAtmosphereCanvas.height = appViewHeightBoundary;
+            });
+
+            const CRITICAL_PARTICLE_MAX_COUNT = 65;
+            const particleDataArrayMemoryField = [];
+
+            class DynamicMatrixPinkParticleNode {
+                constructor() {
+                    this.instantiateCoordinateTrackingVectors();
+                }
+
+                instantiateCoordinateTrackingVectors() {
+                    this.axisXLocationCoord = Math.random() * appViewWidthBoundary;
+                    this.axisYLocationCoord = Math.random() * appViewHeightBoundary - appViewHeightBoundary;
+                    this.nodeRadiusPixelSize = Math.random() * 2 + 1;
+                    this.downwardDriftVelocityY = Math.random() * 1.2 + 0.5;
+                    this.skewHorizontalDriftX = Math.random() * 0.4 - 0.2;
+                    this.alphaChannelDensityRatio = Math.random() * 0.5 + 0.3;
+                }
+
+                advancePositionCoordinates() {
+                    this.axisYLocationCoord += this.downwardDriftVelocityY;
+                    this.axisXLocationCoord += this.skewHorizontalDriftX;
+
+                    if (this.axisYLocationCoord > appViewHeightBoundary) {
+                        this.instantiateCoordinateTrackingVectors();
+                        this.axisYLocationCoord = 0;
+                    }
+                    if (this.axisXLocationCoord > appViewWidthBoundary || this.axisXLocationCoord < 0) {
+                        this.axisXLocationCoord = Math.random() * appViewWidthBoundary;
+                    }
+                }
+
+                paintBufferToCanvasFrame() {
+                    coreCanvasRenderingContext2D.beginPath();
+                    coreCanvasRenderingContext2D.arc(this.axisXLocationCoord, this.axisYLocationCoord, this.nodeRadiusPixelSize, 0, Math.PI * 2);
+                    coreCanvasRenderingContext2D.fillStyle = `rgba(255, 113, 178, ${this.alphaChannelDensityRatio})`;
+                    coreCanvasRenderingContext2D.shadowBlur = 4;
+                    coreCanvasRenderingContext2D.shadowColor = '#ff2a85';
+                    coreCanvasRenderingContext2D.fill();
+                    coreCanvasRenderingContext2D.shadowBlur = 0;
+                }
+            }
+
+            for (let operationalPoolCounter = 0; operationalPoolCounter < CRITICAL_PARTICLE_MAX_COUNT; operationalPoolCounter++) {
+                particleDataArrayMemoryField.push(new DynamicMatrixPinkParticleNode());
+            }
+
+            function animationProcessingLoopSequenceFrame() {
+                coreCanvasRenderingContext2D.clearRect(0, 0, appViewWidthBoundary, appViewHeightBoundary);
+                
+                for (let particleIndexPointer = 0; particleIndexPointer < particleDataArrayMemoryField.length; particleIndexPointer++) {
+                    const currentActiveParticleNode = particleDataArrayMemoryField[particleIndexPointer];
+                    currentActiveParticleNode.advancePositionCoordinates();
+                    currentActiveParticleNode.paintBufferToCanvasFrame();
+                }
+                
+                requestAnimationFrame(animationProcessingLoopSequenceFrame);
+            }
+
+            requestAnimationFrame(animationProcessingLoopSequenceFrame);
+
+            console.log("Secure Cyberpunk Nexus Core Operating Graphics Modules Online.");
+        });
+    </script>
+</body>
+</html>
